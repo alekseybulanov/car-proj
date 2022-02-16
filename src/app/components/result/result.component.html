@@ -1,0 +1,38 @@
+<mat-table [dataSource]="items$$">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item?.id}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item?.name}} </mat-cell>
+    </ng-container>
+  
+     <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item?.type}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> delete </mat-header-cell>
+      <mat-cell *matCellDef="let item"> 
+        <button mat-raised-button color="warn" (click)="deleteItem(item.id)">delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="update">
+      <mat-header-cell *matHeaderCellDef> update </mat-header-cell>
+      <mat-cell *matCellDef="let item"> 
+        <button mat-raised-button color="primary" (click)="openDialog(item)">update</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  
+ 
+<!-- <div *ngFor="let item of items$ | async">
+    {{item.name}} {{item.type}} {{item.id}}
+</div> -->

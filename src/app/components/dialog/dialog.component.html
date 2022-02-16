@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Редактирование {{data.name}}</h2>
+<mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+</mat-form-field>
+<br>
+<mat-form-field>
+    <mat-label>Type</mat-label>
+    <input matInput [(ngModel)]="data.type">
+</mat-form-field>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="updateItem(data.id, data)">Save</button>
+    <button mat-raised-button mat-dialog-close="Closed">Closed</button>
+</mat-dialog-actions>

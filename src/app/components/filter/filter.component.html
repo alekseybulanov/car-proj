@@ -1,0 +1,11 @@
+<form class="filter-container">
+    <mat-form-field class="filter-input" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput name="name" [(ngModel)]="name" placeholder="" />
+    </mat-form-field>
+    <mat-form-field class="filter-input" appearance="fill">
+        <mat-label>Type</mat-label>
+        <input matInput name="type" [(ngModel)]="type" placeholder="" />
+    </mat-form-field>
+    <button class="filter-button" mat-raised-button color="primary" (click)="goToResult()">Search</button>
+</form>
