@@ -44,7 +44,7 @@ export class ResultComponent implements OnInit, OnDestroy  {
   }
 
   deleteItem(id: number) {
-    this.api.deleteItem(id).subscribe();
+    this.facade.deleteItem(id);
     this.facade.getItems();
     console.log('deleted', id);
   }

@@ -8,7 +8,7 @@ import { IItemModel } from '../models';
 })
 export class ApiService {
 
-  ITEMS_URL = environment.apiUrl;
+  private ITEMS_URL = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
