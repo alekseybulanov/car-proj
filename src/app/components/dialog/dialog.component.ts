@@ -1,7 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiService } from 'src/app/services/api.service';
-import { FacadeService } from 'src/app/services/facade.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IItemModel } from '../../models';
 
 @Component({
@@ -11,15 +9,14 @@ import { IItemModel } from '../../models';
 })
 export class DialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IItemModel, private api: ApiService, private facade: FacadeService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IItemModel, private dialogRef: MatDialogRef<DialogComponent>) { }
 
   ngOnInit(): void {
 
   }
   
   updateItem(id: number, data: IItemModel) {
-    this.api.updateItem(id, data).subscribe();
-    this.facade.getItems();
+    this.dialogRef.close(data);
   }
 
 }

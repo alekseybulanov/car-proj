@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { IItemModel } from '../models';
 import { ApiService } from './api.service';
 import { StorageService } from './storage.service';
 
@@ -26,8 +25,13 @@ export class FacadeService {
       tap((items) => this.storage.loadItems(items))
     ).subscribe(console.log);
     this._deleteItemRequest.asObservable().pipe(
-      switchMap((itemId) => this.api.deleteItem(itemId)),
-    ).subscribe();
+    //  tap(itemId => this.storage.deleteItems(itemId)),
+    //   switchMap((itemId) => this.api.deleteItem(itemId)),
+      tap(itemId => this.api.deleteItem(itemId)),
+      tap(itemId => this.storage.deleteItems(itemId))
+    ).subscribe(console.log);
+
+
   }
 
   getItems() {

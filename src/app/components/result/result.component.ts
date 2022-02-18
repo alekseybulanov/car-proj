@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { IItemModel } from 'src/app/models';
 import { map, switchMap } from 'rxjs/operators'
 import { FacadeService } from 'src/app/services/facade.service';
-import { ApiService } from '../../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -22,16 +21,14 @@ export class ResultComponent implements OnInit, OnDestroy  {
 
   displayedColumns: string[] = ['id', 'name', 'type', 'delete', 'update'];
   items$$!: Observable<IItemModel[]>;
-  get items$(): Observable<IItemModel[]> {
-    return this.facade.items$
-  }
-  constructor(private readonly facade: FacadeService, private route: ActivatedRoute, private api: ApiService, public dialog: MatDialog ) {
+  
+  constructor(private readonly facade: FacadeService, private route: ActivatedRoute, public dialog: MatDialog ) {
     
   }
   
   ngOnInit() {
     this.facade.getItems();
-    this.items$$ = this.items$.pipe(
+    this.items$$ = this.facade.items$.pipe(
       switchMap(items => this.route.queryParams
         .pipe(
           map(param => items.filter(item => { 
@@ -45,8 +42,8 @@ export class ResultComponent implements OnInit, OnDestroy  {
 
   deleteItem(id: number) {
     this.facade.deleteItem(id);
-    this.facade.getItems();
-    console.log('deleted', id);
+   //this.facade.getItems();
+    //console.log('deleted', id);                     
   }
 
   openDialog(item: IItemModel) {
