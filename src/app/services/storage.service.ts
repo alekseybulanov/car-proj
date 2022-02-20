@@ -17,8 +17,13 @@ export class StorageService implements OnInit {
   }
 
   deleteItems(itemId: number) {
-    this._storageService.next(this._storageService.getValue().filter(item => itemId !== item.id));
-    console.log('deleted:',itemId);
+    const newItems = this._storageService.getValue().filter(item => itemId !== item.id);
+    this._storageService.next(newItems);
+  }
+
+  updateItem(item: IItemModel) {
+    const newItems = this._storageService.getValue().map(storageItem => storageItem.id === item.id ? item : storageItem);
+    this._storageService.next(newItems);
   }
   
 }
