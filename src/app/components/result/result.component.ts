@@ -46,11 +46,9 @@ export class ResultComponent implements OnInit, OnDestroy {
     const dialogRef: MatDialogRef<DialogComponent, IItemModel> = this.dialog.open(DialogComponent, { data: item });
     await dialogRef.afterClosed().toPromise().then(res => {
       if (res) {
-        return this.facade.updateItem(res);
+        this.facade.updateItem(res);
       }
-    }
-    );
-
+    });
   }
 
   ngOnDestroy() { }

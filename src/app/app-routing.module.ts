@@ -9,7 +9,8 @@ const routes: Routes = [
 
   { path: '', redirectTo: "AppComponent", pathMatch: 'full' },
   { path: 'filter', component: FilterComponent },
-  { path: 'result', component: ResultComponent},
+  { path: 'result', component: ResultComponent}
+  
 ];
 
 @NgModule({
