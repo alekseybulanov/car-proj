@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
 import { ResultComponent } from './components/result/result.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button';
@@ -23,7 +22,6 @@ import { EditComponent } from './components/edit/edit.component'
     AppComponent,
     FilterComponent,
     ResultComponent,
-    DashboardComponent,
     DialogComponent,
     EditComponent,
   ],

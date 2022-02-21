@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Editing {{data.name}}</h2>
-<form [formGroup]="form" (ngSubmit)="save()">
+<form [formGroup]="form">
 <mat-form-field >
     <mat-label>Name</mat-label>
     <input matInput formControlName="name">
