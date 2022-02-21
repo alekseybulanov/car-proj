@@ -20,7 +20,6 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'name', 'type', 'delete', 'update'];
   items$!: Observable<IItemModel[]>;
-
   constructor(private readonly facade: FacadeService, private route: ActivatedRoute, public dialog: MatDialog) {
 
   }
@@ -43,11 +42,15 @@ export class ResultComponent implements OnInit, OnDestroy {
     this.facade.deleteItem(id);
   }
 
-  openDialog(item: IItemModel) {
+  async openDialog(item: IItemModel) {
     const dialogRef: MatDialogRef<DialogComponent, IItemModel> = this.dialog.open(DialogComponent, { data: item });
-    dialogRef.afterClosed().pipe(
-      tap(item => this.facade.updateItem(item))
-    ).subscribe()
+    await dialogRef.afterClosed().toPromise().then(res => {
+      if (res) {
+        return this.facade.updateItem(res);
+      }
+    }
+    );
+
   }
 
   ngOnDestroy() { }
