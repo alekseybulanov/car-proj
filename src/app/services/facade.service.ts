@@ -28,7 +28,7 @@ export class FacadeService {
     ).subscribe(console.log);
     this._deleteItemRequest.asObservable().pipe(
       tap(itemId => this.api.deleteItem(itemId)),
-      tap(itemId => this.storage.deleteItems(itemId))
+      tap(itemId => this.storage.deleteItem(itemId))
     ).subscribe(console.log);
     this._updateItemRequest.asObservable().pipe(
       tap(item => this.api.updateItem(item.id, item)),
@@ -44,7 +44,7 @@ export class FacadeService {
     this._deleteItemRequest.next(itemId);
   }
 
-  updateItems(item: IItemModel | undefined) {
+  updateItem(item: IItemModel | undefined) {
     this._updateItemRequest.next(item);
   }
 

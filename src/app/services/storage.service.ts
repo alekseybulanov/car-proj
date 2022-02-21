@@ -16,7 +16,7 @@ export class StorageService implements OnInit {
     this._storageService.next(items);
   }
 
-  deleteItems(itemId: number) {
+  deleteItem(itemId: number) {
     const newItems = this._storageService.getValue().filter(item => itemId !== item.id);
     this._storageService.next(newItems);
   }

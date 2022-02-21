@@ -2,13 +2,12 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IItemModel } from 'src/app/models';
-import { filter, map, switchMap, tap } from 'rxjs/operators'
+import { map, switchMap, tap } from 'rxjs/operators'
 import { FacadeService } from 'src/app/services/facade.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { strTransform } from 'src/app/utils';
 
-
-const strTransform = (str: string) => str.trim().toLowerCase()
 
 @Component({
   selector: 'app-result',
@@ -20,7 +19,7 @@ const strTransform = (str: string) => str.trim().toLowerCase()
 export class ResultComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'name', 'type', 'delete', 'update'];
-  items$$!: Observable<IItemModel[]>;
+  items$!: Observable<IItemModel[]>;
 
   constructor(private readonly facade: FacadeService, private route: ActivatedRoute, public dialog: MatDialog) {
 
@@ -28,7 +27,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.facade.getItems();
-    this.items$$ = this.facade.items$.pipe(
+    this.items$ = this.facade.items$.pipe(
       switchMap(items => this.route.queryParams
         .pipe(
           map(param => items.filter(item => {
@@ -47,7 +46,7 @@ export class ResultComponent implements OnInit, OnDestroy {
   openDialog(item: IItemModel) {
     const dialogRef: MatDialogRef<DialogComponent, IItemModel> = this.dialog.open(DialogComponent, { data: item });
     dialogRef.afterClosed().pipe(
-      tap(item => this.facade.updateItems(item))
+      tap(item => this.facade.updateItem(item))
     ).subscribe()
   }
 
