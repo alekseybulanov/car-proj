@@ -52,9 +52,9 @@ export class ResultComponent implements OnInit, OnDestroy {
     
     const dialogRef: MatDialogRef<DialogComponent, IItemModel> = this.dialog.open(DialogComponent, dialogConfig);
     const data = await dialogRef.afterClosed().toPromise()
-    console.log(data)
     if (data && typeof data !== 'undefined' && (data?.name !== item?.name || data?.type !== item?.type)) {
-          this.facade.updateItem(data); }
+      this.facade.updateItem(data); 
+    }
     // .then(data => {
     //   if (data && typeof data !== 'undefined' && (data?.name !== item?.name || data?.type !== item?.type)) {
     //     this.facade.updateItem(data);
