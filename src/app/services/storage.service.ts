@@ -25,5 +25,10 @@ export class StorageService implements OnInit {
     const newItems = this._storageService.getValue().map(storageItem => storageItem.id === item.id ? item : storageItem);
     this._storageService.next(newItems);
   }
+
+  createItem(item: IItemModel) {
+    // const newItems = this._storageService.getValue().push(item);
+    // this._storageService.next(newItems);
+  }
   
 }

@@ -13,6 +13,7 @@ export class FacadeService {
   private _getItemsRequest = new Subject<void>();
   private _deleteItemRequest = new Subject<number>();
   private _updateItemRequest = new Subject<IItemModel>();
+  private _createItemRequest = new Subject<IItemModel>();
 
   get items$() {
     return this.storage.storageService;
@@ -45,7 +46,12 @@ export class FacadeService {
   }
 
   updateItem(item: IItemModel | undefined) {
-    this._updateItemRequest.next(item);
+    if (typeof item !== 'undefined') { 
+      this._updateItemRequest.next(item); 
+    }
+  } 
+  createItem(item: IItemModel) {
+    this._createItemRequest.next(item);
   }
 
 }

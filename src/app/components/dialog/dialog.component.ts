@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IItemModel } from '../../models';
 
@@ -19,9 +19,9 @@ export class DialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      id: this.data.id,
-      name: this.data.name,
-      type: this.data.type,
+      id:this.data.id,
+      name: [this.data.name, [Validators.required, Validators.minLength(3)]],
+      type: [this.data.type, [Validators.required, Validators.minLength(3)]]
     });
   }
 

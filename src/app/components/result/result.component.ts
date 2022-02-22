@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IItemModel } from 'src/app/models';
 import { map, switchMap, tap } from 'rxjs/operators'
 import { FacadeService } from 'src/app/services/facade.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { strTransform } from 'src/app/utils';
 
@@ -43,12 +43,23 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   async openDialog(item: IItemModel) {
-    const dialogRef: MatDialogRef<DialogComponent, IItemModel> = this.dialog.open(DialogComponent, { data: item });
-    await dialogRef.afterClosed().toPromise().then(res => {
-      if (res) {
-        this.facade.updateItem(res);
-      }
-    });
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = item;
+    dialogConfig.width = '300px';
+    
+    const dialogRef: MatDialogRef<DialogComponent, IItemModel> = this.dialog.open(DialogComponent, dialogConfig);
+    const data = await dialogRef.afterClosed().toPromise()
+    console.log(data)
+    if (data && typeof data !== 'undefined' && (data?.name !== item?.name || data?.type !== item?.type)) {
+          this.facade.updateItem(data); }
+    // .then(data => {
+    //   if (data && typeof data !== 'undefined' && (data?.name !== item?.name || data?.type !== item?.type)) {
+    //     this.facade.updateItem(data);
+    //   }
+    // });
   }
 
   ngOnDestroy() { }
