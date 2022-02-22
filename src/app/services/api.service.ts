@@ -23,7 +23,6 @@ export class ApiService {
   }
   deleteItem(itemId: number) {
     return this.http.delete<void>(`${this.ITEMS_URL}/${itemId}`);
-    
   }
   createItem(payload: IItemModel) {
     return this.http.post<IItemModel>(this.ITEMS_URL, payload);
