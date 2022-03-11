@@ -15,7 +15,8 @@ import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { EditComponent } from './components/edit/edit.component'
+import { EditComponent } from './components/edit/edit.component';
+import { CreateComponent } from './components/create/create.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { EditComponent } from './components/edit/edit.component'
     ResultComponent,
     DialogComponent,
     EditComponent,
+    CreateComponent,
   ],
   entryComponents: [DialogComponent],
   imports: [
