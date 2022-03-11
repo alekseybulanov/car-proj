@@ -3,12 +3,15 @@
 <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput formControlName="name">
+    <mat-error *ngIf="form.controls['name'].hasError('required')">...</mat-error>
+    <mat-error *ngIf="form.controls['name'].hasError('minlength')">3 min</mat-error>
 </mat-form-field>
 <br>
 <mat-form-field>
     <mat-label>Type</mat-label>
     <input matInput formControlName="type">
-    <mat-error>123</mat-error>
+    <mat-error *ngIf="form.controls['type'].hasError('required')">...</mat-error>
+    <mat-error *ngIf="form.controls['type'].hasError('minlength')">3 min</mat-error>
 </mat-form-field>
 <mat-dialog-actions>
     <button mat-raised-button [disabled]="!form.valid" (click)="save()">Save</button>

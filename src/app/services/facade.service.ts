@@ -16,7 +16,7 @@ export class FacadeService {
   private _createItemRequest = new Subject<IItemModel>();
 
   get items$() {
-    return this.storage.storageService;
+    return this.storage.storageData;
   }
 
   constructor(
@@ -34,7 +34,11 @@ export class FacadeService {
     this._updateItemRequest.asObservable().pipe(
       tap(item => this.api.updateItem(item.id, item)),
       tap(item => this.storage.updateItem(item))
-    ).subscribe(console.log)
+    ).subscribe(console.log);
+    this._createItemRequest.asObservable().pipe(
+      tap(item => this.api.createItem(item)),
+      tap(item => this.storage.createItem(item))
+    ).subscribe(console.log);
   }
 
   getItems() {
@@ -45,10 +49,8 @@ export class FacadeService {
     this._deleteItemRequest.next(itemId);
   }
 
-  updateItem(item: IItemModel | undefined) {
-    if (typeof item !== 'undefined') { 
-      this._updateItemRequest.next(item); 
-    }
+  updateItem(item: IItemModel) {
+    this._updateItemRequest.next(item); 
   } 
   createItem(item: IItemModel) {
     this._createItemRequest.next(item);

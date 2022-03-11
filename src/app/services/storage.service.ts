@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IItemModel } from '../models';
 
 @Injectable({
@@ -7,28 +8,29 @@ import { IItemModel } from '../models';
 })
 export class StorageService implements OnInit {
   
-  private _storageService = new BehaviorSubject<IItemModel[]>([]);
-  storageService = this._storageService.asObservable();
+  private _storageData = new BehaviorSubject<IItemModel[]>([]);
+  storageData = this._storageData.asObservable();
 
   ngOnInit() { }
 
   loadItems(items: IItemModel[]) {
-    this._storageService.next(items);
+    this._storageData.next(items);
   }
 
   deleteItem(itemId: number) {
-    const newItems = this._storageService.getValue().filter(item => itemId !== item.id);
-    this._storageService.next(newItems);
+    const newItems = this._storageData.getValue().filter(item => itemId !== item.id);
+    this._storageData.next(newItems);
   }
 
   updateItem(item: IItemModel) {
-    const newItems = this._storageService.getValue().map(storageItem => storageItem.id === item.id ? item : storageItem);
-    this._storageService.next(newItems);
+    const newItems = this._storageData.getValue().map(storageItem => storageItem.id === item.id ? item : storageItem);
+    this._storageData.next(newItems);
   }
 
   createItem(item: IItemModel) {
-    // const newItems = this._storageService.getValue().push(item);
-    // this._storageService.next(newItems);
+    const newItems = this._storageData.getValue();
+    newItems.push(item);
+    this._storageData.next(newItems);
   }
   
 }
